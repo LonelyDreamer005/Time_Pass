@@ -19,14 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('dark-mode');
         themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
     }
-    
-    // Function to determine the API URL based on environment
+      // Function to determine the API URL based on environment
     function getApiUrl() {
+        // IMPORTANT: Update this URL with your actual Render backend URL after deployment
+        const RENDER_BACKEND_URL = 'https://pokedex-fe-cpq6.onrender.com'; 
+        
         // Check if we're running on Render (production)
         if (window.location.hostname.includes('render.com') || 
             window.location.hostname.includes('onrender.com')) {
             // When hosted on Render, use the backend service URL
-            return 'https://aipokedex-api.onrender.com/chat';
+            return RENDER_BACKEND_URL;
         }
         // For development environment
         return 'http://127.0.0.1:5000/chat';
