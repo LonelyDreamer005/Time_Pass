@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to determine the API URL based on environment
     function getApiUrl() {
         // IMPORTANT: Update this URL with your actual Render backend URL after deployment
-        const RENDER_BACKEND_URL = 'https://aipokedex-api.onrender.com/chat'; 
+        const RENDER_BACKEND_URL = 'https://pokedex-fe-cpq6.onrender.com'; 
         
         // Check if we're running on Render (production)
         if (window.location.hostname.includes('render.com') || 
