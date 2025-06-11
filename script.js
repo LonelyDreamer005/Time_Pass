@@ -21,17 +21,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to determine the API URL based on environment
     function getApiUrl() {
-        // IMPORTANT: Update this URL with your actual Render backend URL after deployment
-        const RENDER_BACKEND_URL = 'https://pokedex-fe-cpq6.onrender.com'; 
-        
-        // Check if we're running on Render (production)
+    // IMPORTANT: Update this URL with your actual Render backend URL after deployment
+        const RENDER_BACKEND_URL = 'https://pokedex-api-7lhy.onrender.com'; 
+    
+    // Check if we're running on Render (production)
         if (window.location.hostname.includes('render.com') || 
-            window.location.hostname.includes('onrender.com')) {
-            // When hosted on Render, use the backend service URL
-            return RENDER_BACKEND_URL;
+        window.location.hostname.includes('onrender.com')) {
+        // When hosted on Render, use the backend service URL
+        return RENDER_BACKEND_URL;
         }
-        // For development environment
-        return 'http://127.0.0.1:5000/chat';
+    // For development environment
+    return 'http://127.0.0.1:5000/chat';
     }
 
     // Pokemon type color mapping
