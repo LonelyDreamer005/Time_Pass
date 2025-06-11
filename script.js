@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
     checkServerConnection();
     
     // Initialize theme from localStorage or default to light
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    if (savedTheme === 'dark') {
+    const savedTheme = localStorage.getItem('theme') || 'light';    if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
         themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
     }
-      // Function to determine the API URL based on environment
+    
+    // Function to determine the API URL based on environment
     function getApiUrl() {
         // IMPORTANT: Update this URL with your actual Render backend URL after deployment
-        const RENDER_BACKEND_URL = 'https://pokedex-fe-cpq6.onrender.com'; 
+        const RENDER_BACKEND_URL = 'https://aipokedex-api.onrender.com/chat'; 
         
         // Check if we're running on Render (production)
         if (window.location.hostname.includes('render.com') || 

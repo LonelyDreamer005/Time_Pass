@@ -4,7 +4,8 @@ import requests
 import os
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend requests
+# Enable CORS with more specific settings to allow requests from your frontend domain
+CORS(app, resources={r"/*": {"origins": ["https://pokedex-fe-cpq6.onrender.com", "http://localhost:*", "http://127.0.0.1:*"]}}, supports_credentials=True)
 
 POKEAPI_URL = "https://pokeapi.co/api/v2/pokemon/"
 
@@ -68,6 +69,16 @@ def chat():
     except Exception as e:
         print("Error:", e)
         return jsonify({'reply': 'Something went wrong on our end. Please try again later!'}), 500
+
+# Add a route to handle OPTIONS requests for CORS preflight
+@app.route('/chat', methods=['OPTIONS'])
+def handle_options():
+    response = jsonify({'status': 'ok'})
+    response.headers.add('Access-Control-Allow-Origin', 'https://pokedex-fe-cpq6.onrender.com')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
