@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiPokeDex | Find Your Pokémon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" type="image/png">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header-container">
+            <h1><i class="fa-solid fa-gamepad"></i> AiPokeDex</h1>
+            <button id="theme-toggle" title="Toggle dark/light mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+        <div id="chat-box">
+            <div class="welcome-message card">
+                <h3>Welcome, Trainer!</h3>
+                <p>Search for any Pokémon by name to get detailed information about it.</p>
+                <p>Try searching for "pikachu", "charizard", or your favorite Pokémon!</p>
+            </div>
+        </div>
+        <div class="input-container">
+            <input id="user-input" type="text" placeholder="Search for a Pokémon...">
+            <button id="send-btn"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button id="clear-btn"><i class="fa-solid fa-broom"></i> Clear</button>
+        </div>
+        <div class="footer">
+            <p>Powered by <a href="https://pokeapi.co/" target="_blank">PokeAPI</a> | <span class="connection-status">Server: <span id="server-status">Checking...</span></span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
