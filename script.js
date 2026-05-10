@@ -7,32 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const serverStatus = document.getElementById('server-status');
     const originalButtonText = sendButton.innerHTML;
     
-    // Get API URL (based on environment - local or production)
-    const API_URL = getApiUrl();
+    // Use relative path for unified application
+    const API_URL = '/chat';
     
     // Check server connection
     checkServerConnection();
     
     // Initialize theme from localStorage or default to light
-    const savedTheme = localStorage.getItem('theme') || 'light';    if (savedTheme === 'dark') {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
         themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
     }
-    
-    // Function to determine the API URL based on environment
-    function getApiUrl() {
-    // IMPORTANT: Update this URL with your actual Render backend URL after deployment
-        const RENDER_BACKEND_URL = 'https://pokedex-api-7lhy.onrender.com'; 
-    
-    // Check if we're running on Render (production)
-        if (window.location.hostname.includes('render.com') || 
-        window.location.hostname.includes('onrender.com')) {
-        // When hosted on Render, use the backend service URL
-        return RENDER_BACKEND_URL;
-        }
-    // For development environment
-    return 'http://127.0.0.1:5000/chat';
-    }
+
 
     // Pokemon type color mapping
     const typeColorClasses = {

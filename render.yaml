@@ -1,21 +1,10 @@
 services:
-  # Backend API
+  # Unified Full-Stack Service
   - type: web
-    name: aipokedex-api
+    name: aipokedex-app
     runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
-
-  # Frontend static site
-  - type: web
-    name: aipokedex-frontend
-    runtime: static
-    buildCommand: echo "Static site, no build needed"
-    staticPublishPath: ./
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html

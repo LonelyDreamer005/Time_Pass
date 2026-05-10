@@ -1,13 +1,15 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 import requests
 import os
 
-app = Flask(__name__)
-# Enable CORS with more specific settings to allow requests from your frontend domain
-CORS(app, resources={r"/*": {"origins": ["https://pokedex-fe-cpq6.onrender.com", "http://localhost:*", "http://127.0.0.1:*"]}}, supports_credentials=True)
+# Serve static files from the current directory
+app = Flask(__name__, static_folder='.', static_url_path='')
 
 POKEAPI_URL = "https://pokeapi.co/api/v2/pokemon/"
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -69,16 +71,6 @@ def chat():
     except Exception as e:
         print("Error:", e)
         return jsonify({'reply': 'Something went wrong on our end. Please try again later!'}), 500
-
-# Add a route to handle OPTIONS requests for CORS preflight
-@app.route('/chat', methods=['OPTIONS'])
-def handle_options():
-    response = jsonify({'status': 'ok'})
-    response.headers.add('Access-Control-Allow-Origin', 'https://pokedex-fe-cpq6.onrender.com')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
