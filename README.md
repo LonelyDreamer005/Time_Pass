@@ -1,32 +1,37 @@
-﻿# AiPokeDex - Pokémon Information App
+# AiPokeDex - Pokémon Information App
 
-An interactive Pokémon information app built with Flask, JavaScript, and the PokeAPI.
+**🌟 Live Demo:** [https://pokedex-6wa0.onrender.com/](https://pokedex-6wa0.onrender.com/)
+
+An interactive, full-stack Pokémon information app built with Flask, JavaScript, and the PokeAPI.
 
 ## Features
 
-- Search for Pokémon by name to get detailed information
-- Display Pokémon images, types, moves, and stats
+- Search for Pokémon by name with real-time autocomplete recommendations
+- Display high-quality Pokémon artwork, types, moves, and stats
+- Beautiful, fully responsive split-screen UI
 - Dark/light theme toggle
-- Responsive design for mobile and desktop
-- Server connection status indicator
 
 ## Technology Stack
 
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Flask (Python)
+- **Frontend**: HTML, CSS, Vanilla JavaScript
+- **Backend**: Python (Flask)
 - **API**: PokeAPI
-- **Deployment**: Render
+- **Deployment**: Render.com
 
 ## Local Development
 
+The application is a unified full-stack application. The Flask backend serves both the API routes and the frontend static files natively.
+
 1. Clone the repository
-2. Run the backend server:
-   ```
-   cd Time_Pass
+2. Install the Python dependencies:
+   ```bash
    pip install -r requirements.txt
+   ```
+3. Run the backend server:
+   ```bash
    python app.py
    ```
-3. Open `index.html` in your browser
+4. Open your browser and navigate to `http://127.0.0.1:5000`
 
 ## Credits
 
