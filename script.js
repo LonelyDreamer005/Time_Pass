@@ -46,10 +46,54 @@ document.addEventListener('DOMContentLoaded', function() {
     // Focus input field on page load
     userInput.focus();
 
+    const autocompleteList = document.getElementById('autocomplete-list');
+    let pokemonNames = [];
+
+    // Fetch pokemon names for autocomplete
+    async function fetchPokemonNames() {
+        try {
+            const response = await fetch('/api/pokemon_names');
+            if (response.ok) {
+                pokemonNames = await response.json();
+            }
+        } catch (error) {
+            console.error('Failed to fetch pokemon names', error);
+        }
+    }
+    fetchPokemonNames();
+
+    userInput.addEventListener('input', function() {
+        const val = this.value.trim().toLowerCase();
+        autocompleteList.innerHTML = '';
+        if (!val) {
+            return false;
+        }
+        
+        const matches = pokemonNames.filter(name => name.startsWith(val)).slice(0, 10);
+        
+        matches.forEach(match => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${match.substr(0, val.length)}</strong>${match.substr(val.length)}`;
+            li.addEventListener('click', function() {
+                userInput.value = match;
+                autocompleteList.innerHTML = '';
+                sendButton.click(); // Trigger search immediately
+            });
+            autocompleteList.appendChild(li);
+        });
+    });
+
+    document.addEventListener('click', function(e) {
+        if (e.target !== userInput) {
+            autocompleteList.innerHTML = '';
+        }
+    });
+
     // Trigger search on Enter key
     userInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault();
+            autocompleteList.innerHTML = '';
             sendButton.click();
         }
     });

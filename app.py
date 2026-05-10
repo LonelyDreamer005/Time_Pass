@@ -7,6 +7,21 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 
 POKEAPI_URL = "https://pokeapi.co/api/v2/pokemon/"
 
+pokemon_names_cache = []
+
+@app.route('/api/pokemon_names')
+def get_pokemon_names():
+    global pokemon_names_cache
+    if not pokemon_names_cache:
+        try:
+            response = requests.get("https://pokeapi.co/api/v2/pokemon?limit=2000")
+            if response.status_code == 200:
+                data = response.json()
+                pokemon_names_cache = [p['name'] for p in data['results']]
+        except Exception as e:
+            print("Error fetching names:", e)
+    return jsonify(pokemon_names_cache)
+
 @app.route('/')
 def index():
     return app.send_static_file('index.html')

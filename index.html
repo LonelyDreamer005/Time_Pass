@@ -25,7 +25,10 @@
             </div>
         </div>
         <div class="input-container">
-            <input id="user-input" type="text" placeholder="Search for a Pokémon...">
+            <div class="autocomplete-wrapper">
+                <input id="user-input" type="text" placeholder="Search for a Pokémon...">
+                <ul id="autocomplete-list" class="autocomplete-items"></ul>
+            </div>
             <button id="send-btn"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
             <button id="clear-btn"><i class="fa-solid fa-broom"></i> Clear</button>
         </div>
