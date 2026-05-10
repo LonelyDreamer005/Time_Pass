@@ -1,30 +1,57 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background: #f5f7fa;
     margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    color: #333;
     transition: background 0.5s ease;
 }
 
-.chat-container {
-    width: 600px;
-    background: rgba(255, 255, 255, 0.85); 
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.left-panel {
+    width: 400px;
+    background: #ffffff;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 35px;
+    z-index: 10;
     transition: all 0.3s ease;
 }
 
+.right-panel {
+    flex: 1;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    padding: 50px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#chat-box {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Header */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
 h1 {
-    text-align: center;
     color: #E3350D;
     font-size: 2.2em;
-    margin-bottom: 20px;
+    margin: 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     position: relative;
 }
@@ -33,96 +60,142 @@ h1::after {
     content: '';
     position: absolute;
     bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 3px;
-    background: linear-gradient(90deg, rgba(227, 53, 13, 0.1), rgba(227, 53, 13, 0.8), rgba(227, 53, 13, 0.1));
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: #E3350D;
+    border-radius: 2px;
 }
 
-#chat-box {
-    height: 500px;
+#theme-toggle {
+    width: 45px;
+    height: 45px;
+    flex: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0f0f0;
+    color: #555;
     border: none;
-    padding: 15px;
-    overflow-y: auto;
-    margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 12px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-    scroll-behavior: smooth;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
 }
 
-.card {
-    border: none;
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 15px;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    animation: fadeIn 0.5s;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
+#theme-toggle:hover {
+    background: #e0e0e0;
+    transform: rotate(15deg);
 }
 
-img {
-    width: 150px;
-    height: 150px;
-    display: block;
-    margin: 0 auto;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2));
+/* Search Section */
+.search-section {
+    flex: 1;
 }
 
-img:hover {
-    transform: scale(1.1);
+.search-desc {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
 }
 
 .input-container {
     display: flex;
-    gap: 12px;
-    align-items: center;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .autocomplete-wrapper {
     position: relative;
-    flex: 1;
+    width: 100%;
 }
 
 input {
     width: 100%;
     box-sizing: border-box;
-    padding: 12px 16px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    padding: 16px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
     font-size: 1em;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    font-family: inherit;
+    background: #fafafa;
     transition: all 0.3s;
 }
 
+input:focus {
+    outline: none;
+    border-color: #E3350D;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(227, 53, 13, 0.1);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 14px;
+    cursor: pointer;
+    background-color: #E3350D;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1em;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(227, 53, 13, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-group button:hover {
+    background-color: #c92a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(227, 53, 13, 0.3);
+}
+
+.secondary-btn {
+    background-color: #f0f0f0;
+    color: #555;
+    box-shadow: none;
+}
+
+.secondary-btn:hover {
+    background-color: #e4e4e4;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Autocomplete */
 .autocomplete-items {
     position: absolute;
-    border: 1px solid #d4d4d4;
+    border: 1px solid #e0e0e0;
     border-top: none;
     z-index: 99;
     top: 100%;
     left: 0;
     right: 0;
     background-color: #fff;
-    max-height: 200px;
+    max-height: 250px;
     overflow-y: auto;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .autocomplete-items li {
-    padding: 12px 16px;
+    padding: 14px 20px;
     cursor: pointer;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #f0f0f0;
     text-transform: capitalize;
-    font-size: 0.95em;
+    transition: background 0.2s;
 }
 
 .autocomplete-items li:last-child {
@@ -130,115 +203,137 @@ input {
 }
 
 .autocomplete-items li:hover {
-    background-color: #f5f5f5;
+    background-color: #fff0ed;
+    color: #E3350D;
 }
 
-input:focus {
-    outline: none;
-    border-color: #E3350D;
-    box-shadow: 0 0 0 3px rgba(227, 53, 13, 0.15);
+/* Cards / Right Panel */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    animation: slideUp 0.5s ease forwards;
+    position: relative;
+    overflow: hidden;
 }
 
-button {
-    padding: 12px 20px;
-    cursor: pointer;
-    background-color: #E3350D;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(227, 53, 13, 0.2);
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-button:hover {
-    background-color: #d12d0b;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(227, 53, 13, 0.3);
+.welcome-message {
+    text-align: center;
+    padding: 60px 40px;
 }
 
-button:active {
-    transform: translateY(0);
-}
-
-button:disabled {
-    background-color: #e0e0e0;
-    color: #a0a0a0;
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
+.card .welcome-img {
+    width: 80px;
+    height: 80px;
+    opacity: 0.8;
+    margin: 0 auto 20px;
 }
 
 .card h3 {
-    color: #E3350D;
-    text-align: center;
-    margin-top: 0;
-    font-size: 1.6em;
+    color: #333;
+    font-size: 2.5em;
     text-transform: capitalize;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.card p {
-    margin: 10px 0;
-    line-height: 1.5;
+.card img {
+    width: 250px;
+    height: 250px;
+    display: block;
+    margin: 0 auto 30px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.card p strong {
-    color: #E3350D;
+.card img:hover {
+    transform: scale(1.1) rotate(5deg);
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+.pokemon-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.detail-section h4 {
+    color: #888;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-top: 0;
 }
 
 .pokemon-type {
     display: inline-block;
-    padding: 4px 8px;
-    margin: 2px;
-    border-radius: 4px;
-    font-size: 0.8em;
-    font-weight: 500;
+    padding: 6px 14px;
+    margin: 0 6px 6px 0;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
     text-transform: capitalize;
     color: white;
+    letter-spacing: 0.5px;
 }
 
-.loading-spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255,255,255,.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.moves-list {
+    line-height: 1.8;
+    color: #444;
 }
 
 .pokemon-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 15px;
+    gap: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
 }
 
 .stat-box {
     text-align: center;
-    padding: 8px;
-    background: rgba(227, 53, 13, 0.05);
-    border-radius: 8px;
+    padding: 20px 10px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    transition: all 0.3s;
 }
 
-.stat-box span {
-    font-weight: bold;
+.stat-box:hover {
+    background: #fff0ed;
+    transform: translateY(-5px);
+}
+
+.stat-label {
+    color: #888;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.4em;
+}
+
+.footer {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.footer a {
     color: #E3350D;
-    font-size: 1.2em;
+    text-decoration: none;
+    font-weight: 500;
 }
 
 /* Pokemon type colors */
@@ -261,25 +356,25 @@ button:disabled {
 .type-steel { background-color: #B7B7CE; }
 .type-fairy { background-color: #D685AD; }
 
-/* Pokeball loader */
+/* Loaders */
 .pokeball-loader {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(to bottom, #f00 0%, #f00 50%, #fff 50%, #fff 100%);
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(to bottom, #E3350D 0%, #E3350D 50%, #fff 50%, #fff 100%);
     border-radius: 50%;
-    border: 3px solid #333;
+    border: 4px solid #333;
     position: relative;
-    margin: 20px auto;
-    animation: rotate 1.5s linear infinite;
+    margin: 40px auto;
+    animation: rotate 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .pokeball-loader::before {
     content: '';
     position: absolute;
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
     background-color: #fff;
-    border: 3px solid #333;
+    border: 4px solid #333;
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -287,222 +382,158 @@ button:disabled {
 }
 
 @keyframes rotate {
-    from { transform: rotate(0deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
     to { transform: rotate(360deg); }
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-    width: 8px;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #E3350D; }
 
-::-webkit-scrollbar-track {
-    background: rgba(240, 240, 240, 0.5);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #E3350D;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #d12d0b;
-}
-
-.footer {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 0.85em;
-    color: #777;
-}
-
-.footer a {
-    color: #E3350D;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
-
-.welcome-message {
-    text-align: center;
-}
-
-/* Dark Mode Styles */
+/* Dark Mode */
 body.dark-mode {
-    background: linear-gradient(135deg, #1f1f1f 0%, #303030 100%);
+    background: #121212;
+    color: #e0e0e0;
 }
 
-body.dark-mode .chat-container {
-    background: rgba(30, 30, 30, 0.85);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+body.dark-mode .left-panel {
+    background: #1e1e1e;
+    border-right-color: #333;
 }
 
-body.dark-mode h1,
-body.dark-mode .card h3,
-body.dark-mode .card p strong,
-body.dark-mode .stat-box span {
-    color: #FF6B6B;
-}
-
-body.dark-mode h1::after {
-    background: linear-gradient(90deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.8), rgba(255, 107, 107, 0.1));
-}
-
-body.dark-mode #chat-box {
-    background: rgba(35, 35, 35, 0.8);
+body.dark-mode .right-panel {
+    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
 }
 
 body.dark-mode .card {
-    background: rgb(45, 45, 45);
-    color: #e0e0e0;
+    background: #252525;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-body.dark-mode .autocomplete-items {
-    background-color: rgb(45, 45, 45);
-    border-color: #444;
-}
-
-body.dark-mode .autocomplete-items li {
-    border-color: #555;
-    color: #e0e0e0;
-}
-
-body.dark-mode .autocomplete-items li:hover {
-    background-color: #3a3a3a;
+body.dark-mode .card h3 {
+    color: #FF6B6B;
 }
 
 body.dark-mode input {
-    background: rgb(60, 60, 60);
-    color: white;
+    background: #2a2a2a;
     border-color: #444;
-}
-
-body.dark-mode input::placeholder {
-    color: #aaa;
+    color: #fff;
 }
 
 body.dark-mode input:focus {
     border-color: #FF6B6B;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15);
+    background: #333;
 }
 
-body.dark-mode button {
-    background-color: #FF6B6B;
+body.dark-mode .autocomplete-items {
+    background-color: #2a2a2a;
+    border-color: #444;
 }
 
-body.dark-mode button:hover {
-    background-color: #ff5252;
+body.dark-mode .autocomplete-items li {
+    border-color: #333;
 }
 
-body.dark-mode .footer {
-    color: #aaa;
+body.dark-mode .autocomplete-items li:hover {
+    background-color: #3a3a3a;
+    color: #FF6B6B;
 }
 
-body.dark-mode .footer a {
+body.dark-mode .secondary-btn {
+    background-color: #333;
+    color: #ccc;
+}
+
+body.dark-mode .secondary-btn:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+body.dark-mode h1 {
+    color: #FF6B6B;
+}
+
+body.dark-mode h1::after {
+    background: #FF6B6B;
+}
+
+body.dark-mode #theme-toggle {
+    background: #333;
+    color: #ccc;
+}
+
+body.dark-mode #theme-toggle:hover {
+    background: #444;
     color: #FF6B6B;
 }
 
 body.dark-mode .stat-box {
-    background: rgba(255, 107, 107, 0.1);
+    background: #1e1e1e;
 }
 
-/* Theme Toggle Button */
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+body.dark-mode .stat-box:hover {
+    background: #2a2a2a;
 }
 
-.header-container h1 {
-    margin-bottom: 0;
+body.dark-mode .stat-value, body.dark-mode .moves-list {
+    color: #ccc;
 }
 
-#theme-toggle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
+body.dark-mode .pokemon-stats {
+    border-color: #333;
 }
 
-#theme-toggle i {
-    font-size: 1.2em;
+/* Error message styling */
+.error-card {
+    border-left: 4px solid #E3350D;
+}
+body.dark-mode .error-card {
+    border-left-color: #FF6B6B;
 }
 
-/* Server status indicator */
-.connection-status {
-    font-size: 0.9em;
-}
-
-#server-status {
-    font-weight: 500;
-}
-
-#server-status.online {
-    color: #4CAF50;
-}
-
-#server-status.offline {
-    color: #F44336;
-}
-
-/* Responsive design */
-@media (max-width: 500px) {
-    body {
-        align-items: flex-start;
-        padding: 15px 0;
-    }
-    
-    .chat-container {
-        width: 92%;
-        padding: 15px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    
-    #chat-box {
-        height: 65vh;
-    }
-    
-    h1 {
-        font-size: 1.8em;
-    }
-    
-    .input-container {
+/* Responsive */
+@media (max-width: 768px) {
+    .app-container {
         flex-direction: column;
-        gap: 8px;
     }
     
-    .input-container button {
+    .left-panel {
         width: 100%;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        z-index: 100;
     }
     
-    .pokemon-stats {
-        grid-template-columns: 1fr;
+    .right-panel {
+        padding: 20px;
     }
     
     .header-container {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
     
     .card {
-        padding: 12px;
+        padding: 25px;
     }
     
-    img {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .pokemon-type {
-        padding: 3px 6px;
-        font-size: 0.75em;
+    .pokemon-details-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 }

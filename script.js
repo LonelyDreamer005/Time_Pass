@@ -102,6 +102,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const message = userInput.value.trim().toLowerCase();
         if (!message) return;
 
+        // Clear previous results to show details on the right
+        chatBox.innerHTML = '';
+
         // Add loading animation
         const loadingEl = document.createElement('div');
         loadingEl.className = 'card';
@@ -152,22 +155,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     cardEl.innerHTML = `
                         <h3>${data.name}</h3>
                         <img src="${data.sprite}" alt="${data.name}" title="${data.name}">
-                        <div>
-                            <p><strong>Type:</strong> ${formattedTypes}</p>
-                            <p><strong>Moves:</strong> ${data.moves}</p>
+                        <div class="pokemon-details-grid">
+                            <div class="detail-section">
+                                <h4>Type</h4>
+                                <div>${formattedTypes}</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Moves</h4>
+                                <div class="moves-list">${data.moves}</div>
+                            </div>
                         </div>
                         <div class="pokemon-stats">
                             <div class="stat-box">
-                                <div>Weight</div>
-                                <span>${data.weight || 'N/A'} kg</span>
+                                <div class="stat-label">Weight</div>
+                                <div class="stat-value">${data.weight || 'N/A'} kg</div>
                             </div>
                             <div class="stat-box">
-                                <div>Height</div>
-                                <span>${data.height || 'N/A'} m</span>
+                                <div class="stat-label">Height</div>
+                                <div class="stat-value">${data.height || 'N/A'} m</div>
                             </div>
                             <div class="stat-box">
-                                <div>Base Exp</div>
-                                <span>${data.base_experience || 'N/A'}</span>
+                                <div class="stat-label">Base Exp</div>
+                                <div class="stat-value">${data.base_experience || 'N/A'}</div>
                             </div>
                         </div>
                     `;
@@ -196,9 +205,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function showErrorMessage(message) {
+        chatBox.innerHTML = '';
         const errorEl = document.createElement('div');
-        errorEl.className = 'card';
-        errorEl.style.borderLeft = '4px solid #E3350D';
+        errorEl.className = 'card error-card';
         errorEl.innerHTML = `
             <p style="color: #E3350D;"><i class="fa-solid fa-circle-exclamation"></i> <strong>Error</strong></p>
             <p>${message}</p>
@@ -211,11 +220,14 @@ document.addEventListener('DOMContentLoaded', function() {
     clearButton.addEventListener('click', function() {
         chatBox.innerHTML = `
             <div class="welcome-message card">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Pokeball" class="welcome-img">
                 <h3>Welcome, Trainer!</h3>
-                <p>Search for any Pokémon by name to get detailed information about it.</p>
-                <p>Try searching for "pikachu", "charizard", or your favorite Pokémon!</p>
+                <p>Enter a Pokémon name on the left to see its details here.</p>
+                <p>Try searching for "pikachu", "charizard", or "mewtwo"!</p>
             </div>
         `;
+        userInput.value = '';
+        userInput.focus();
     });
 
     // Theme toggle functionality
